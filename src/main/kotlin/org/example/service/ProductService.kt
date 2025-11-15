@@ -351,4 +351,39 @@ class ProductService(
             }
         }
     }
+    /**
+     * Cargar productos desde JSON (para migración desde Android)
+     */
+    fun loadProductsFromJson(products: List<Map<String, Any>>): List<Product> {
+        val productsToSave = mutableListOf<Product>()
+
+        for (productData in products) {
+            try {
+                val nombre = productData["nombre"] as? String ?: continue
+                val categoria = productData["categoria"] as? String ?: continue
+                val imagen = productData["imagen"] as? String ?: ""
+                val descripcion = productData["descripcion"] as? String ?: ""
+                val precio = (productData["precio"] as? Number)?.toInt() ?: continue
+                val stock = (productData["stock"] as? Number)?.toInt() ?: continue
+
+                val product = Product(
+                    nombre = nombre,
+                    categoria = categoria,
+                    imagen = imagen,
+                    descripcion = descripcion,
+                    precio = precio,
+                    stock = stock,
+                    createdAt = LocalDateTime.now(),
+                    updatedAt = LocalDateTime.now()
+                )
+
+                productsToSave.add(product)
+            } catch (e: Exception) {
+                println("Error al preparar producto: ${e.message}")
+            }
+        }
+
+        // Guardar todos de una vez
+        return productRepository.saveAll(productsToSave).toList()
+    }
 }

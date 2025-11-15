@@ -501,4 +501,25 @@ class ProductController(
             ))
         }
     }
+    /**
+     * Cargar productos desde JSON
+     * POST /api/products/load-from-json
+     */
+    @PostMapping("/load-from-json")
+    fun loadProductsFromJson(@RequestBody products: List<Map<String, Any>>): ResponseEntity<Any> {
+        return try {
+            val loadedProducts = productService.loadProductsFromJson(products)
+
+            ResponseEntity.ok(mapOf(
+                "success" to true,
+                "message" to "Productos cargados exitosamente",
+                "count" to loadedProducts.size
+            ))
+        } catch (e: Exception) {
+            ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(mapOf(
+                "success" to false,
+                "message" to "Error al cargar productos: ${e.message}"
+            ))
+        }
+    }
 }
