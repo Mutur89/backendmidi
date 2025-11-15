@@ -3,10 +3,10 @@ package org.example.org.example.service
 
 import com.example.lvlupbackend.model.entity.Order
 import com.example.lvlupbackend.model.entity.OrderItem
-import com.example.lvlupbackend.repository.OrderRepository
-import com.example.lvlupbackend.repository.OrderItemRepository
-import com.example.lvlupbackend.repository.ProductRepository
-import com.example.lvlupbackend.repository.UserRepository
+import org.example.org.example.repository.OrderRepository
+import org.example.org.example.repository.OrderItemRepository
+import org.example.org.example.repository.ProductRepository
+import org.example.org.example.repository.UserRepository
 import org.example.org.example.model.enum.OrderStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

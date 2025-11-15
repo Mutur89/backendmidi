@@ -1,11 +1,10 @@
 // service/CartService.kt
 package org.example.org.example.service
 
-import com.example.lvlupbackend.model.entity.Product
-import com.example.lvlupbackend.repository.CartItemRepository
-import com.example.lvlupbackend.repository.CartRepository
-import com.example.lvlupbackend.repository.ProductRepository
-import com.example.lvlupbackend.repository.UserRepository
+import org.example.org.example.repository.CartItemRepository
+import org.example.org.example.repository.CartRepository
+import org.example.org.example.repository.ProductRepository
+import org.example.org.example.repository.UserRepository
 import org.example.model.entity.Cart
 import org.example.model.entity.CartItem
 import org.springframework.stereotype.Service
@@ -303,12 +302,15 @@ class CartService(
      * Obtener detalles completos del carrito
      */
     fun getCartWithDetails(userId: Long): Map<String, Any> {
-        val cart = getCartByUserId(userId) ?: return mapOf(
-            "cart" to null,
-            "items" to emptyList<CartItem>(),
-            "totalItems" to 0,
-            "subtotal" to 0
-        )
+        val cart = getCartByUserId(userId)
+
+        if (cart == null) {
+            return mapOf(
+                "items" to emptyList<CartItem>(),
+                "totalItems" to 0,
+                "subtotal" to 0
+            )
+        }
 
         val totalItems = cart.items.sumOf { it.quantity }
         val subtotal = cart.items.sumOf {

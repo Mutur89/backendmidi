@@ -4,7 +4,7 @@ package org.example.org.example.service
 import com.example.lvlupbackend.model.dto.request.LoginRequest
 import com.example.lvlupbackend.model.dto.request.RegisterRequest
 import com.example.lvlupbackend.model.dto.response.LoginResponse
-import com.example.lvlupbackend.repository.UserRepository
+import org.example.org.example.repository.UserRepository
 import org.example.org.example.model.User
 import org.example.org.example.model.enum.UserRole
 import org.springframework.stereotype.Service
