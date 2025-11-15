@@ -17,7 +17,7 @@ data class Product(
     val categoria: String,
 
     @Column(nullable = false, length = 2000)
-    val imagen: String, // URL de la imagen
+    val imagen: String, // URL
 
     @Column(length = 2000)
     val descripcion: String,
