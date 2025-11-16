@@ -1,6 +1,7 @@
 package com.example.lvlupbackend.model.dto.response
 
 import org.example.org.example.model.enum.UserRole
+
 //
 
 data class LoginResponse(
