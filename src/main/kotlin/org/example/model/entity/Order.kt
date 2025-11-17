@@ -37,7 +37,7 @@ data class Order(
     val direccionEnvio: String,
 
     @OneToMany(mappedBy = "order", cascade = [CascadeType.ALL], orphanRemoval = true)
-    @JsonManagedReference  // ✅ AGREGAR ESTO
+    @JsonManagedReference  // AGREGAR ESTO
     val items: MutableList<OrderItem> = mutableListOf(),
 
     @Column(nullable = false, updatable = false)
