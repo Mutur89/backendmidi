@@ -1,6 +1,4 @@
-package org.example.org.example.model.dto
-
-// model/dto/response/CartResponse.kt
+package org.example.model.dto
 
 import org.example.model.entity.Cart
 

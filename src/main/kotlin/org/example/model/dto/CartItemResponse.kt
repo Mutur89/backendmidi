@@ -1,7 +1,4 @@
-package org.example.org.example.model.dto
-
-// model/dto/response/CartItemResponse.kt
-
+package org.example.model.dto
 
 import org.example.model.entity.CartItem
 import java.math.BigDecimal
@@ -19,16 +16,20 @@ data class CartItemResponse(
 ) {
     companion object {
         fun fromEntity(cartItem: CartItem): CartItemResponse {
+            val product = cartItem.product ?: throw IllegalStateException("CartItem debe tener un Product asociado")
+            val unitPrice = product.precio
+            val subtotal = unitPrice * cartItem.quantity
+
             return CartItemResponse(
                 id = cartItem.id,
-                productId = cartItem.product.id,
-                productName = cartItem.product.nombre,
-                productImage = cartItem.product.imagen,
-                productCategory = cartItem.product.categoria,
-                productDescription = cartItem.product.descripcion,
+                productId = product.id ?: 0,
+                productName = product.nombre,
+                productImage = product.imagen ?: "",
+                productCategory = product.categoria ?: "",
+                productDescription = product.descripcion ?: "",
                 quantity = cartItem.quantity,
-                unitPrice = cartItem.unitPrice.toInt(),
-                subtotal = (cartItem.unitPrice * BigDecimal(cartItem.quantity)).toInt()
+                unitPrice = unitPrice,
+                subtotal = subtotal
             )
         }
     }

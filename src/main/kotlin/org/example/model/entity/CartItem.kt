@@ -1,6 +1,7 @@
 package org.example.model.entity
 
 import com.example.lvlupbackend.model.entity.Product
+import com.fasterxml.jackson.annotation.JsonBackReference
 import jakarta.persistence.*
 import java.math.BigDecimal
 
@@ -11,6 +12,7 @@ class CartItem(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
 
+    @JsonBackReference("cart-items")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cart_id", nullable = false)
     var cart: Cart,
@@ -25,3 +27,4 @@ class CartItem(
     @Column(name = "unit_price", nullable = false, precision = 19, scale = 4)
     var unitPrice: BigDecimal = BigDecimal.ZERO
 )
+
