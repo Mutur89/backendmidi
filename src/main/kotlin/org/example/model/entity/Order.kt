@@ -1,5 +1,6 @@
-// model/entity/Order.kt
 package com.example.lvlupbackend.model.entity
+
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import jakarta.persistence.*
 import org.example.org.example.model.User
 import org.example.org.example.model.enum.OrderStatus
@@ -36,6 +37,7 @@ data class Order(
     val direccionEnvio: String,
 
     @OneToMany(mappedBy = "order", cascade = [CascadeType.ALL], orphanRemoval = true)
+    @JsonManagedReference  // ✅ AGREGAR ESTO
     val items: MutableList<OrderItem> = mutableListOf(),
 
     @Column(nullable = false, updatable = false)
@@ -44,4 +46,3 @@ data class Order(
     @Column(nullable = false)
     var updatedAt: LocalDateTime = LocalDateTime.now()
 )
-

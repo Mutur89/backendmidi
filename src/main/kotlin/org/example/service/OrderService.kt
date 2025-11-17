@@ -32,9 +32,8 @@ class OrderService(
         direccionEnvio: String,
         codigoCupon: String? = null
     ): Order {
-        // 1. Obtener el carrito y validar que no esté vacío
-        val cart = cartService.getCartByUserId(userId)
-            ?: throw IllegalArgumentException("El carrito está vacío")
+        // 1. Obtener el carrito (crear si no existe) y validar que no esté vacío
+        val cart = cartService.getOrCreateCart(userId)  // ✅ CAMBIAR AQUÍ
 
         if (cart.items.isEmpty()) {
             throw IllegalArgumentException("El carrito está vacío")

@@ -1,8 +1,7 @@
-// kotlin
 package com.example.lvlupbackend.model.entity
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import jakarta.persistence.*
-import java.math.BigDecimal
 
 @Entity
 @Table(name = "order_items")
@@ -13,7 +12,8 @@ class OrderItem(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id", nullable = false)
-    var order: Order? = null, // debe llamarse "order" para matchedBy
+    @JsonBackReference  // ✅ AGREGAR ESTO
+    var order: Order? = null,
 
     @Column(nullable = false)
     var productId: Long = 0,
