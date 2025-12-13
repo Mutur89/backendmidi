@@ -41,12 +41,12 @@ class UserController(
         } catch (e: IllegalArgumentException) {
             ResponseEntity.status(HttpStatus.BAD_REQUEST).body(mapOf(
                 "success" to false,
-                "message" to e.message
+                "message" to (e.message ?: "No se pudo completar el registro. Verifique que el correo no esté registrado")
             ))
         } catch (e: Exception) {
             ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(mapOf(
                 "success" to false,
-                "message" to "Error al registrar usuario: ${e.message}"
+                "message" to "No se pudo completar el registro. Intente nuevamente"
             ))
         }
     }
@@ -67,12 +67,12 @@ class UserController(
         } catch (e: IllegalArgumentException) {
             ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(mapOf(
                 "success" to false,
-                "message" to e.message
+                "message" to (e.message ?: "Credenciales incorrectas. Verifique su correo y contraseña")
             ))
         } catch (e: Exception) {
             ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(mapOf(
                 "success" to false,
-                "message" to "Error al iniciar sesión: ${e.message}"
+                "message" to "No se pudo iniciar sesión. Intente nuevamente"
             ))
         }
     }
@@ -92,12 +92,12 @@ class UserController(
         } catch (e: IllegalArgumentException) {
             ResponseEntity.status(HttpStatus.NOT_FOUND).body(mapOf(
                 "success" to false,
-                "message" to e.message
+                "message" to (e.message ?: "No se encontró el usuario solicitado")
             ))
         } catch (e: Exception) {
             ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(mapOf(
                 "success" to false,
-                "message" to "Error al obtener usuario: ${e.message}"
+                "message" to "No se pudo obtener la información del usuario. Intente nuevamente"
             ))
         }
     }

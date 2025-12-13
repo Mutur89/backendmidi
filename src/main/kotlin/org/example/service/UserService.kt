@@ -56,7 +56,7 @@ class UserService(
      * Login de usuario
      */
     fun loginUser(request: LoginRequest): LoginResponse {
-        // Buscar usuario por correo
+        // Buscar usuario por correo en la BBDD
         val user = userRepository.findByCorreo(request.correo)
             .orElseThrow { IllegalArgumentException("Correo o contraseña incorrectos") }
 
